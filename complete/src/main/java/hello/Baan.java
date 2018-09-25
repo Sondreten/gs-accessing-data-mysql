@@ -1,13 +1,13 @@
 package hello;
 
+
 import javax.persistence.*;
 
 @Entity
 public class Baan {
-	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+
 	@Column(name = "imo")
-	private Integer imo;
+	private @Id @GeneratedValue int imo;
 
 	@Column(name = "configuration")
 	private String configuration;
@@ -76,11 +76,11 @@ public class Baan {
 
 	}
 
-	public Integer getIMO() {
+	public int getIMO() {
 		return imo;
 	}
 
-	public void setIMO(Integer imo) {
+	public void setIMO(int imo) {
 		this.imo = imo;
 	}
 
