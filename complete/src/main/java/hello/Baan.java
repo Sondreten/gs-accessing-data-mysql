@@ -6,8 +6,10 @@ import javax.persistence.*;
 @Entity
 public class Baan {
 
-	@Column(name = "imo")
-	private @Id @GeneratedValue int imo;
+	@Column(name = "id")
+	private @Id @GeneratedValue int id;
+
+	/*
 
 	@Column(name = "configuration")
 	private String configuration;
@@ -20,7 +22,7 @@ public class Baan {
 
 	@Column(name = "vesselsubtypedesc")
 	private String vesselsubtypedesc;
-	/*
+
         @Column(name = "objectgroup")
         private String objectgroup;
 
@@ -76,14 +78,14 @@ public class Baan {
 
 	}
 
-	public int getIMO() {
-		return imo;
+	public int getId() {
+		return id;
 	}
 
-	public void setIMO(int imo) {
-		this.imo = imo;
+	public void setId(int id) {
+		this.id = id;
 	}
-
+/*
 	public String getConfiguration() {
 		return configuration;
 	}

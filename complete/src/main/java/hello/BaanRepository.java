@@ -13,4 +13,5 @@ import java.util.Optional;
 
 public interface BaanRepository extends CrudRepository<Baan, Integer> {
 
+    Baan findById(int id);
 }
