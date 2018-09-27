@@ -16,6 +16,9 @@ public class MainController {
 	@Autowired
 	private PortRepository portRepository;
 
+
+	@Autowired
+	private FleetmonRepository fleetmonRepository;
 	
 	@GetMapping(path="/boat/all")
 	public @ResponseBody Iterable<Baan> getAllUsers() {
@@ -27,6 +30,12 @@ public class MainController {
 	public @ResponseBody Iterable<Port> getAllPorts() {
 		// This returns a JSON or XML with the users
 		return portRepository.findAll();
+	}
+
+	@GetMapping(path="/fleetmon/all")
+	public @ResponseBody Iterable<Fleetmon> getAllFleetmonData() {
+		// This returns a JSON or XML with the users
+		return fleetmonRepository.findAll();
 	}
 
 	@GetMapping("/boat/{id}")
