@@ -15,11 +15,11 @@ public class Port {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "latitude")
-    private double latitude;
+    @Column(name = "lat")
+    private double lat;
 
-    @Column(name = "longitude")
-    private double longitude;
+    @Column(name = "lng")
+    private double lng;
 
     public Port(){
 
@@ -41,20 +41,20 @@ public class Port {
         this.name = name;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public double getLat() {
+        return lat;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 
 
-    public double getLongitude() {
-        return longitude;
+    public double getLng() {
+        return lng;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 }

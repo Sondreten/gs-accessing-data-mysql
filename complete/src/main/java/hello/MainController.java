@@ -1,9 +1,26 @@
 package hello;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Data;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import javax.rmi.CORBA.ValueHandler;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Controller    // This means that this class is a Controller
@@ -43,5 +60,68 @@ public class MainController {
 		return baanRepository.findById(id);
 	}
 
+/*
+	@RequestMapping(value="/fleetmon/update", method=RequestMethod.GET)
+	public @ResponseBody List<Fleetmon> findAllObjects() {
 
+		RestTemplate restTemplate = new RestTemplate();
+
+		ResponseEntity<List<Fleetmon>> rateResponse =
+				restTemplate.exchange("https://www.fleetmon.com/api/p/personal-v1/myfleet/?username=sondrete&api_key=606d7be6076e2bf1497d58cb7d2985689b32b43c&format=json",
+						HttpMethod.GET, null, new ParameterizedTypeReference<List<Fleetmon>>() {
+						});
+		List<Fleetmon> rates = rateResponse.getBody();
+
+		fleetmonRepository.saveAll(rates);
+		return rates;
+	}
+*/
+/*
+	@RequestMapping(value="/fleetmon/update", method=RequestMethod.GET)
+	public @ResponseBody List<Fleetmon> findAllObjects() {
+
+		RestTemplate restTemplate = new RestTemplate();
+		String urlGETList = "https://www.fleetmon.com/api/p/personal-v1/myfleet/?username=sondrete&api_key=606d7be6076e2bf1497d58cb7d2985689b32b43c&format=json";
+
+		ResponseEntity<Fleetmon[]> responseEntity = restTemplate.getForEntity(urlGETList, Fleetmon[].class);
+		Fleetmon[] fleetmons = responseEntity.getBody();
+		MediaType contentType = responseEntity.getHeaders().getContentType();
+		HttpStatus statusCode = responseEntity.getStatusCode();
+
+		List<Fleetmon> objects = new ArrayList<Fleetmon>();
+
+		fleetmonRepository.saveAll(objects);
+		return objects;
+	}
+	*/
+
+	@RequestMapping(value = "/resttemp", method = RequestMethod.GET, produces = "application/json")
+	@CrossOrigin(origins = "http://localhost:3000")
+	@ResponseBody
+	public String testingRestTemp() throws JSONException {
+		final RestTemplate restTemplate = new RestTemplate();
+		final String response = restTemplate.getForObject("https://www.fleetmon.com/api/p/personal-v1/myfleet/?username=sondrete&api_key=606d7be6076e2bf1497d58cb7d2985689b32b43c&format=json", String.class);
+
+
+		JSONArray jsonArr = new JSONArray(response);
+		List<Fleetmon> fleetmons = new ArrayList<>();
+		for (int i = 0; i < jsonArr.length(); i++) {
+
+			JSONObject jsonObj = jsonArr.getJSONObject(i);
+			jsonObj.get("vessel");
+			Fleetmon fleetmon = new Fleetmon();
+
+
+			fleetmon.imonumber = jsonObj.getInt("imonumber");
+			fleetmon.etatime = jsonObj.getString("etatime");
+			fleetmon.nextport = jsonObj.getString("nextport");
+
+			fleetmons.add(fleetmon);
+		}
+
+		fleetmonRepository.saveAll(fleetmons);
+
+
+		return response;
+	}
 }
