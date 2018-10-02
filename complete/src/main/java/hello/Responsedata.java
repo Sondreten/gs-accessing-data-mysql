@@ -1,22 +1,24 @@
 package hello;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+public class Responsedata {
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class FleetmonTemp {
+    @Id
+    @Column(name = "imonumber")
+    private  int imonumber;
 
-    private int imonumber;
-
+    @Column(name = "etatime")
     private String etatime;
 
+    @Column(name = "nextport")
     private String nextport;
 
-    public FleetmonTemp(){
+
+
+    public Responsedata(){
 
     }
 
@@ -43,5 +45,6 @@ public class FleetmonTemp {
     public void setNextport(String nextport) {
         this.nextport = nextport;
     }
+
 
 }

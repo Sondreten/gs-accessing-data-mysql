@@ -1,23 +1,20 @@
 package hello;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+import javax.persistence.*;
+
 @Entity
 public class Fleetmon {
 
+    @Id
     @Column(name = "imonumber")
-    public @Id @GeneratedValue int imonumber;
+    private  int imonumber;
 
     @Column(name = "etatime")
-    public String etatime;
+    private String etatime;
 
     @Column(name = "nextport")
-    public String nextport;
+    private String nextport;
 
     public Fleetmon(){
 
@@ -47,12 +44,5 @@ public class Fleetmon {
         this.nextport = nextport;
     }
 
-    @Override
-    public String toString() {
-        return "Fleetmon{" +
-                " imonumber=" + imonumber + + '\'' +
-                ", etatime=" + etatime +
-                '}';
-    }
 
 }
